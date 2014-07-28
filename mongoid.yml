@@ -1,8 +1,0 @@
-development:
-  sessions:
-    default:
-      uri: 'mongodb://djiango:showblog210@kahana.mongohq.com:10053/blog'
-production:
-  sessions:
-    default:
-      uri: 'mongodb://djiango:showblog210@kahana.mongohq.com:10053/blog'

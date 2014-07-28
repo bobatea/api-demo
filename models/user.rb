@@ -1,11 +1,24 @@
 class User
   include Mongoid::Document
-  field :username
-  field :password
+  include Mongoid::Timestamps
+  include Mongoid::Autoinc
+  include ActiveModel::SecurePassword
 
-  def self.authenticate(username, password)
-      u = User.where(:username => username).first
-      return nil if u.nil?
-      return u if Digest::MD5.hexdigest(password) == u.password
-  end
+  field :user_id, type: Integer
+  field :username, :type => String
+  field :password_digest, :type => String
+
+  # increased id
+  increments :user_id
+
+  # username
+  validates :username,  presence: true, length: { maximum: 50 }
+
+  # password
+  validates_presence_of :password, :on => :create
+  has_secure_password validations: false
+  validates :password, length: { minimum: 6 }
+
+
+
 end

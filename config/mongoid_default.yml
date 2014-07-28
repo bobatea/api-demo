@@ -1,0 +1,8 @@
+development:
+  sessions:
+    default:
+      uri: mongohq_url
+production:
+  sessions:
+    default:
+      uri: mongohq_url
