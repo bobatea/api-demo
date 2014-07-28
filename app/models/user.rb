@@ -19,6 +19,4 @@ class User
   has_secure_password validations: false
   validates :password, length: { minimum: 6 }
 
-
-
 end
