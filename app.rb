@@ -22,7 +22,7 @@ post '/user', provides: :json do
   if user.save
     user.to_json
   else
-    json_status 404, "Not found"
+    {failure: "creating error"}.to_json
   end
 end
 
@@ -30,11 +30,11 @@ end
 get "/user/:id" do
   content_type :json
 
-  user = User.find_by(user_id: params[:id].to_i)
+  user = User.find_by(user_id: params[:id].to_i) rescue nil
   if user
     user.to_a.to_json
   else
-    json_status 404, "Not found"
+    {failure: "finding error"}.to_json
   end
 end
 
@@ -42,12 +42,12 @@ end
 get '/user/:id/delete' do
   content_type :json
 
-  user = User.find_by(user_id: params[:id].to_i)
+  user = User.find_by(user_id: params[:id].to_i) rescue nil
 
   if user.destroy
     {:success => "ok"}.to_json
   else
-    json_status 404, "Not found"
+    {failure: "deleting error"}.to_json
   end
 end
 
@@ -55,11 +55,11 @@ end
 post "/login", provides: :json do
   content_type :json
 
-  user = User.find_by(username: params[:username])
+  user = User.find_by(username: params[:username]) rescue nil
 
   if user.authenticate(params[:password])
     user.to_a.to_json
   else
-    json_status 404, "Not found"
+    {failure: "login error"}.to_json
   end
 end
