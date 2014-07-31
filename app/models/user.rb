@@ -5,8 +5,9 @@ class User
   include ActiveModel::SecurePassword
 
   field :user_id, type: Integer
-  field :username, :type => String
-  field :password_digest, :type => String
+  field :username, type: String
+  field :password_digest, type: String
+  has_one :token, class_name: "Token", dependent: :delete
 
   # increased id
   increments :user_id

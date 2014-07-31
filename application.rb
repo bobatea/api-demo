@@ -2,12 +2,14 @@
 #  all requirements
 #
 require 'sinatra/base'
+require 'sinatra/namespace'
 require 'json'
+require 'securerandom'
 require 'mongoid'
 require 'autoinc'
 
 class BobaAPI < Sinatra::Base
-  use Rack::Session::Pool, :expire_after => 2592000
+  register Sinatra::Namespace
   enable :session
 
   configure :production do
@@ -21,13 +23,19 @@ class BobaAPI < Sinatra::Base
 
   # welcome
   get '/' do
-    content_type :json
-    {message: "welcome to BobaAPI"}.to_json
+    {
+      message: "welcome to BobaAPI"
+    }.to_json
   end
 
-  get '/about' do
-    content_type :json
-    {message: ""}.to_json
+  # Auth
+  before '/protected/*' do
+    token = authenticate!
+    error 401 unless token
+  end
+
+  get '/unauthenticated' do
+
   end
 
   # 404
@@ -36,12 +44,21 @@ class BobaAPI < Sinatra::Base
     {error: "404 !", messages: "Not found."}.to_json
   end
 
-  # general error handle
-  error 400..500 do
+  # 401
+  error 401 do
     content_type :json
     {
-      error: "Boom !",
-      messages: "An error ocurred."
+      error: "401",
+      messages: "Unauthorization error"
+    }.to_json
+  end
+
+  # general error handle
+  error 500 do
+    content_type :json
+    {
+      error: "500",
+      messages: "Inner error"
     }.to_json
   end
 
@@ -52,5 +69,4 @@ Dir["./app/*/*.rb"].each {|file| require file }
 
 # Mongoid config
 Mongoid.load!("./config/mongoid.yml")
-
-# all ENV
+# config.oauth.database = Mongo::Connection.new(mongoid_config['host'], mongoid_config['port']).db(mongoid_config['database'])
