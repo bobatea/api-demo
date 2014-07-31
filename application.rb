@@ -34,10 +34,6 @@ class BobaAPI < Sinatra::Base
     error 401 unless token
   end
 
-  get '/unauthenticated' do
-
-  end
-
   # 404
   not_found do
     content_type :json
