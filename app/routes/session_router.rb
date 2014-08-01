@@ -34,7 +34,7 @@ class BobaAPI < Sinatra::Base
 
     if user.save
       token = Token.create!
-      user.tocken = token
+      user.token = token
       {
         success: true,
         info: user,
