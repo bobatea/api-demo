@@ -16,13 +16,13 @@ class BobaAPI < Sinatra::Base
       end
     end
 
-    # find
-    get "/user/:id" do
+    # self
+    get "/user/profile" do
       content_type :json
 
-      user = User.find_by(user_id: params[:id].to_i) rescue nil
+      user = @token.user rescue nil
       if user
-        user.to_a.to_json
+        user.to_json
       else
         {
           error: "user not found",
@@ -31,20 +31,35 @@ class BobaAPI < Sinatra::Base
       end
     end
 
-    # delete
-    delete '/user/:id' do
+    # find
+    get "/user/:id" do
       content_type :json
 
       user = User.find_by(user_id: params[:id].to_i) rescue nil
-
-      if user && user.destroy!
-        {success: "user deleted"}.to_json
+      if user
+        user.to_json
       else
         {
-          error: "deleting error",
-          messages: "deleting error"
+          error: "user not found",
+          messages: "user not found"
         }.to_json
       end
     end
+
+    # # delete
+    # delete '/user/:id' do
+    #   content_type :json
+
+    #   user = User.find_by(user_id: params[:id].to_i) rescue nil
+
+    #   if user && user.destroy!
+    #     {success: "user deleted"}.to_json
+    #   else
+    #     {
+    #       error: "deleting error",
+    #       messages: "deleting error"
+    #     }.to_json
+    #   end
+    # end
   end
 end
