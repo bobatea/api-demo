@@ -24,7 +24,7 @@ class BobaAPI < Sinatra::Base
   # welcome
   get '/' do
     {
-      message: "welcome to BobaAPI"
+      message: "welcome to Boba-API"
     }.to_json
   end
 
