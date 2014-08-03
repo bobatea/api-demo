@@ -1,4 +1,4 @@
-# Boba-api demo
+# Boba-Api
 To run
 `rackup -p 4567`
 
