@@ -14,7 +14,7 @@ class BobaAPI < Sinatra::Base
       {
         success: true,
         info: user,
-        token: user.token
+        token: user.token.access_token
       }.to_json
     else
       {
