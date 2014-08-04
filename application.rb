@@ -3,14 +3,17 @@
 #
 require 'sinatra/base'
 require 'sinatra/namespace'
+require 'goliath'
+require 'grape'
 require 'json'
 require 'securerandom'
 require 'mongoid'
+require 'em-synchrony'
 require 'autoinc'
 
-class BobaAPI < Sinatra::Base
+# Sinatra as Front-End
+class PicPic < Sinatra::Base
   register Sinatra::Namespace
-  enable :session
 
   configure :production do
     set :clean_trace, true
@@ -23,46 +26,30 @@ class BobaAPI < Sinatra::Base
 
   # welcome
   get '/' do
-    {
-      message: "welcome to Boba-API"
-    }.to_json
-  end
-
-  # Auth
-  before '/protected/*' do
-    token = authenticate!
-    error 401 unless token
-  end
-
-  # 404
-  not_found do
-    content_type :json
-    {error: "404 !", messages: "Not found."}.to_json
-  end
-
-  # 401
-  error 401 do
-    content_type :json
-    {
-      error: "401",
-      messages: "Unauthorization error"
-    }.to_json
-  end
-
-  # general error handle
-  error 500 do
-    content_type :json
-    {
-      error: "500",
-      messages: "Inner error"
-    }.to_json
+    "welcome to PicPic-FrontEnd"
   end
 
 end
+
+
+# Grape as API
+class PicPicAPI < Grape::API
+
+  prefix 'api'
+  version 'v1', :using => :path
+  format :json
+
+  get do
+    {
+      message: "welcome to PicPic-API"
+    }
+  end
+
+end
+
 
 # load app files
 Dir["./app/*/*.rb"].each {|file| require file }
 
 # Mongoid config
 Mongoid.load!("./config/mongoid.yml")
-# config.oauth.database = Mongo::Connection.new(mongoid_config['host'], mongoid_config['port']).db(mongoid_config['database'])

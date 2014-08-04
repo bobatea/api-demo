@@ -1,6 +1,6 @@
 class Pic
   include Mongoid::Document
-  include Mongoid::Timestamps
+  include Mongoid::Timestamps::Created
   include Mongoid::Autoinc
 
   field :pic_id, type: Integer

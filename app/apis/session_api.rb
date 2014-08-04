@@ -2,9 +2,8 @@
 # session controller
 #
 
-class BobaAPI < Sinatra::Base
-  post "/login", provides: :json do
-    content_type :json
+class PicPicAPI < Grape::API
+  post "/signin" do
 
     user = User.find_by(username: params[:username]) rescue nil
 
@@ -16,19 +15,18 @@ class BobaAPI < Sinatra::Base
         info: user,
         token: user.token.access_token,
         desc: "shabi"
-      }.to_json
+      }
     else
       {
         success: false,
-        messages: "login error"
-      }.to_json
+        messages: "signin error"
+      }
     end
   end
 
 
   # create
   post '/signup', provides: :json do
-    content_type :json
 
     user = User.new(:username => params[:username],
                     :password => params[:password])
@@ -40,31 +38,38 @@ class BobaAPI < Sinatra::Base
         success: true,
         info: user,
         token: token
-      }.to_json
+      }
     else
       {
         success: false,
         messages: user.errors.messages
-      }.to_json
+      }
     end
   end
 
-  namespace '/protected' do
+  namespace :protected do
+
+    # Auth
+    before do
+      error!('Unauthorized', 401) unless authenticate!
+    end
+
     get '/signout' do
-      content_type :json
       str = request.env["HTTP_ACCESS_TOKEN"]
       token = Token.find_by(access_token: str) rescue nil
       if token && token.destroy!
         {
           success: true,
           messages: "signout success"
-        }.to_json
+        }
       else
         {
           success: false,
           messages: "signout error"
-        }.to_json
+        }
       end
     end
+
   end
+
 end
