@@ -3,12 +3,10 @@
 #
 require 'sinatra/base'
 require 'sinatra/namespace'
-require 'goliath'
 require 'grape'
 require 'json'
 require 'securerandom'
 require 'mongoid'
-require 'em-synchrony'
 require 'autoinc'
 
 # Sinatra as Front-End
@@ -43,6 +41,10 @@ class PicPicAPI < Grape::API
     {
       message: "welcome to PicPic-API"
     }
+  end
+
+  get :session do
+    session
   end
 
 end
