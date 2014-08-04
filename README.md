@@ -1,4 +1,4 @@
-# Boba-Api
+# Picpic-Api
 To run
 `rackup -p 4567`
 
