@@ -64,10 +64,9 @@ Dir["./app/*/*.rb"].each {|file| require file }
 Mongoid.load!('./config/mongoid.yml')
 
 # AWS config
-_aws = YAML.load(File.read('./config/aws.yml'))
 AWS.config(
-  :access_key_id     => _aws['AWS_ACCESS_KEY_ID'],
-  :secret_access_key => _aws['AWS_SECRET_ACCESS_KEY']
+  :access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
+  :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
 )
 
 # S3 univeral variable
