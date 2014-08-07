@@ -14,5 +14,7 @@ gem 'em-synchrony'
 gem 'activemodel'
 gem 'mongoid-autoinc'
 
+gem 'aws-sdk'
+
 gem 'bcrypt'
 gem 'pry'
