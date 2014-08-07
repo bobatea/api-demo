@@ -6,7 +6,6 @@ gem 'sinatra'
 gem 'sinatra-namespace'
 gem 'grape'
 gem 'goliath'
-gem 'unicorn'
 gem 'json'
 
 gem 'mongoid'
@@ -17,4 +16,11 @@ gem 'mongoid-autoinc'
 gem 'aws-sdk'
 
 gem 'bcrypt'
-gem 'pry'
+
+group :production, :test do
+  gem 'unicorn'
+end
+
+group :development, :test do
+  gem 'pry'
+end
