@@ -32,8 +32,7 @@ class PicPicAPI < Grape::API
                     :password => params[:password])
 
     if user.save
-      token = Token.create!
-      user.token = token
+      user.token = Token.create!
       {
         success: true,
         info: user,

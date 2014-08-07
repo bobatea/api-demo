@@ -7,14 +7,15 @@ class User
   field :user_id, type: Integer
   field :username, type: String
   field :password_digest, type: String
+
   has_one :token, dependent: :destroy
   has_many :pics, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+
   # increased id
   increments :user_id
-
   # username
   validates :username,  presence: true, length: { maximum: 50 },
                         uniqueness: true

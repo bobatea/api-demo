@@ -45,14 +45,6 @@ class PicPicAPI < Grape::API
     }
   end
 
-  get :session do
-    session
-  end
-
-  get :set do
-    session[:id] = params[:id]
-  end
-
 end
 
 
