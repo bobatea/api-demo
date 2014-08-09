@@ -17,10 +17,17 @@ gem 'aws-sdk'
 
 gem 'bcrypt'
 
-group :production, :test do
+group :production do
   gem 'unicorn'
 end
 
 group :development, :test do
   gem 'pry'
+end
+
+group :test do
+  gem 'rspec'
+  gem 'rack-test'
+  gem 'database_cleaner'
+  # gem 'capybara'
 end
