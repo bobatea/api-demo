@@ -4,6 +4,7 @@ class Pic
   include Mongoid::Autoinc
 
   field :pic_id, type: Integer
+  field :s3_filename, type: String
   field :url, type: String
   field :description, type: String
 
@@ -15,6 +16,7 @@ class Pic
   increments :pic_id
 
   # url must present
+  validates :s3_filename, presence: true
   validates :url,  presence: true
 
 end

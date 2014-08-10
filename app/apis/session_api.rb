@@ -36,7 +36,7 @@ class PicPicAPI < Grape::API
       {
         success: true,
         info: user,
-        token: token
+        token: user.token
       }
     else
       {
