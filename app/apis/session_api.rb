@@ -29,7 +29,8 @@ class PicPicAPI < Grape::API
   post '/signup', provides: :json do
 
     user = User.new(:username => params[:username],
-                    :password => params[:password])
+                    :password => params[:password],
+                    :gender => params[:gender])
 
     if user.save
       user.token = Token.create!

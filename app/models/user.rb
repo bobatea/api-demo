@@ -6,6 +6,7 @@ class User
 
   field :user_id, type: Integer
   field :username, type: String
+  field :gender, type: String
   field :password_digest, type: String
 
   has_one :token, dependent: :destroy
@@ -19,6 +20,8 @@ class User
   # username
   validates :username,  presence: true, length: { maximum: 50 },
                         uniqueness: true
+  # gender
+  validates :gender,  presence: true, length: { minimum: 1 }
 
   # password
   validates_presence_of :password, :on => :create
