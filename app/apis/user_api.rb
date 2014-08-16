@@ -29,7 +29,7 @@ class PicPicAPI < Grape::API
       else
         {
           error: "user not found",
-          messages: "user not found"
+          info: "user not found"
         }
       end
     end
@@ -43,7 +43,7 @@ class PicPicAPI < Grape::API
       else
         {
           error: "user not found",
-          messages: "user not found"
+          info: "user not found"
         }
       end
     end
@@ -58,7 +58,7 @@ class PicPicAPI < Grape::API
     #   else
     #     {
     #       error: "deleting error",
-    #       messages: "deleting error"
+    #       info: "deleting error"
     #     }
     #   end
     # end

@@ -34,7 +34,7 @@ class PicPicAPI < Grape::API
       else
         {
           success: false,
-          messages: new_pic.errors.messages
+          info: new_pic.errors.messages
         }
       end
     end

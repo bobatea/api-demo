@@ -67,12 +67,12 @@ class PicPicAPI < Grape::API
       if token && token.destroy!
         {
           success: true,
-          messages: "signout success"
+          info: "signout success"
         }
       else
         {
           success: false,
-          messages: "signout error"
+          info: "signout error"
         }
       end
     end
