@@ -14,8 +14,8 @@ class PicPicAPI < Grape::API
         success: true,
         info: {
           username: user.username,
-          user_id: user_id,
-          gender: gender,
+          user_id: user.user_id,
+          gender: user.gender,
           token: user.token.access_token
         }
       }
@@ -41,8 +41,8 @@ class PicPicAPI < Grape::API
         success: true,
         info: {
           username: user.username,
-          user_id: user_id,
-          gender: gender,
+          user_id: user.user_id,
+          gender: user.gender,
           token: user.token.access_token
         }
       }
