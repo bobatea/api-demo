@@ -21,7 +21,7 @@ class User
   validates :username,  presence: true, length: { maximum: 50 },
                         uniqueness: true
   # gender
-  validates :gender,  presence: true, length: { minimum: 1 }
+  validates :gender,  presence: true
 
   # password
   validates_presence_of :password, :on => :create
