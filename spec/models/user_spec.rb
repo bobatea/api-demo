@@ -3,7 +3,8 @@ require 'spec_helper'
 describe User do
 
   before { @user = User.new(username: "testuser",
-                            password: "testuser")
+                            password: "testuser",
+                            gender: "male")
           }
 
   subject { @user }
@@ -51,5 +52,13 @@ describe User do
       it { should_not eq user_for_invalid_password }
       specify { expect(user_for_invalid_password).to be_falsey }
     end
+  end
+
+  # test gender
+  describe "when genderis not present" do
+    before do
+      @user = User.new(username: "testtest", password: "testuser")
+    end
+    it { should_not be_valid }
   end
 end
