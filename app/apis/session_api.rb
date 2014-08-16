@@ -12,9 +12,12 @@ class PicPicAPI < Grape::API
       user.token = Token.create! unless user.token
       {
         success: true,
-        info: user,
-        token: user.token.access_token,
-        desc: "shabi"
+        info: {
+          username: user.username,
+          user_id: user_id,
+          gender: gender,
+          token: user.token.access_token
+        }
       }
     else
       {
@@ -36,8 +39,12 @@ class PicPicAPI < Grape::API
       user.token = Token.create!
       {
         success: true,
-        info: user,
-        token: user.token
+        info: {
+          username: user.username,
+          user_id: user_id,
+          gender: gender,
+          token: user.token.access_token
+        }
       }
     else
       {
