@@ -1,4 +1,4 @@
-@dir = "/root/Sites/picpic-api"
+@dir = "/root/Sites/picpic-api/"
 
 worker_processes 2
 working_directory @dir
