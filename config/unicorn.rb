@@ -1,6 +1,6 @@
 @dir = "/root/Sites/picpic-api/"
 
-worker_processes 2
+worker_processes 4
 working_directory @dir
 
 timeout 30
@@ -15,3 +15,6 @@ pid "#{@dir}tmp/pids/unicorn.pid"
 # Set log file paths
 stderr_path "#{@dir}log/unicorn.stderr.log"
 stdout_path "#{@dir}log/unicorn.stdout.log"
+
+
+
